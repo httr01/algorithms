@@ -21,7 +21,8 @@ public class StackWithMin {
 	public int peek(){
 		return origStack[origStackTopIndex] ;
 	}
-	public int pop(){
+	public int pop() throws Exception{
+		if (origStackTopIndex == -1)  throw  new Exception ("Stack is already empty");
 		if (origStack[origStackTopIndex] ==  minStack[minStackTopIndex]  ) --minStackTopIndex;
 		return origStack[origStackTopIndex--];
 	}
