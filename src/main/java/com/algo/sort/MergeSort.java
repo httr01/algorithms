@@ -53,8 +53,8 @@ public class MergeSort {
 	}
 	@Test
 	public void happyPathSort_veryLargeArray() {
-		int[] A = {4,5,1,8,2,45,40,30,41,37,42,39,28,15,10};
-		int[] A_sorted_expected = {1,2,4,5,8,10,15,28,30,37,39,40,41,42,45};
+		int[] A = {4,5,1,8,2,45,40,30,41,37,42,39,28,15,10,6,12,32};
+		int[] A_sorted_expected = {1,2,4,5,6,8,10,12,15,28,30,32,37,39,40,41,42,45};
 		mergesort(A,0,A.length-1);
 		Assert.assertArrayEquals(A_sorted_expected, A);
 	}	
