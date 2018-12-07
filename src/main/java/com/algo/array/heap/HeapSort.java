@@ -61,6 +61,22 @@ public class HeapSort {
 			dataArr[index1] =  dataArr[index2];
 			dataArr[index2] =  temp;
 	}
+	/*** We are assuming that we want to increase the value at index 'increaseIndexAt' **/
+	public void increaseElementValueAtIndex(int[] dataArr, int increaseIndexAt, int newKeyValue) {
+		if (increaseIndexAt < 0 || increaseIndexAt > dataArr.length-1 || dataArr.length==0 || dataArr[increaseIndexAt-1]>newKeyValue ) {
+			// not right index or new value is less than current value, return without any change
+			return;
+		}
+		dataArr[increaseIndexAt-1]=newKeyValue;
+		int currIndex = increaseIndexAt-1;
+		int parent = currIndex/2;
+		while (parent>=0 && dataArr[parent] < dataArr[currIndex] ) {
+			swap(dataArr,currIndex,parent);
+			if (parent ==0) break;// if parent was root of tree, we should first swap and break from loop after that.
+			currIndex = parent;
+			parent = currIndex/2;
+		}
+	}
 	
 	@Test
 	public void buildHeap_happyCase_small_3() {
@@ -159,5 +175,19 @@ public class HeapSort {
 		int[] A = {};
 		int[] A_heapSorted_expected = {};
 		Assert.assertArrayEquals(A_heapSorted_expected, heapSort(A));
+	}
+	
+	@Test
+	public void buildHeap_happyCase_20_element_and_increaseElementValue() {
+		int[] A = {4,5,1,9,10,2,21,12,15,3,8,20,54,35,18,27,25,22,6,13};
+		int[] A_heapSorted_expected = {54,27,35,25,13,20,21,12,22,10,8,1,2,4,18,5,9,15,6,3};
+			
+		buildMaxHeap(A);
+		Assert.assertArrayEquals(A_heapSorted_expected, A);
+		
+		int[] A_afterIncreaseValue_expected = {62,54,35,27,13,20,21,25,22,10,8,1,2,4,18,5,9,15,6,3};
+		increaseElementValueAtIndex(A, 8, 62);
+		
+		Assert.assertArrayEquals(A_afterIncreaseValue_expected, A);
 	}
 }
