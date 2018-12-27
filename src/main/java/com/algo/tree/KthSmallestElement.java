@@ -19,15 +19,13 @@ public class KthSmallestElement {
 	public void inorderKthSmallest(TreeNode root, int kth  ){
 		if (root == null)  return;
 		inorderKthSmallest(  root.left,   kth  );
-		 
-
 		//visit current
 		++currentSmallestIndex;
 		if (kth == currentSmallestIndex) {
 			kthSmallest = root.val;
 			return;
 		}
-		inorderKthSmallest(  root.right,   kth  );
+		if (currentSmallestIndex<kth) inorderKthSmallest(  root.right,   kth  );
 		 
 	}
 	
