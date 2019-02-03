@@ -32,6 +32,10 @@ After adding -4 to A[0], the array is [-2,-1,3,4], and the sum of even values is
 After adding 2 to A[3], the array is [-2,-1,3,6], and the sum of even values is -2 + 6 = 4.
  
  */
+	/***
+	 * Explanation
+	 * Step1 : First get sum of the array, so we do not need to add all the array element again.
+	 * Step2 : Loop through each query and calculate new sum.*/
     public int[] sumEvenAfterQueries(int[] A, int[][] queries) {
     		int[] finalEvenValues =  new int[A.length];
     		//#1 Get sum of the array, So we do not have to calculate it every time
