@@ -6,16 +6,21 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BellmanFordShortestPath {
+	
+	boolean hasCycle =  false;
 	/** Bellman ford shortest path .
 	 * We can have negative cost.
 	 * Time :O (V+E)
-	 * Space : O( V) **/
+	 * Space : O( V) 
+	 * If there is a cycle, we will come out of the program.**/
 	public int[] findShortestPath(int howManyVertex, int[][] edges, int src , int dest)    
 	{
 		int [] [] vertexMetadata = new int[howManyVertex][2];
 		//  init src to src to 0  rest will be max integer
 		init(howManyVertex,vertexMetadata, src); 
-		for (int i = 0 ; i< howManyVertex-1; ++i) { // we need to run only for V-1 times
+		
+		for (int i = 0 ; i< howManyVertex && !hasCycle; ++i) { // we need to run only for V-1 times
+			hasCycle =  false;
 			for (int j = 0 ; j< edges.length; ++j) { // relax each edge
 				int u = edges[j][0];
 				int v = edges[j][1];
@@ -25,12 +30,19 @@ public class BellmanFordShortestPath {
 				{
 					vertexMetadata[v][0] = vertexMetadata[u][0] + currWeight;
 					vertexMetadata[v][1] =u; //  change the parent
+					
+					if (i ==howManyVertex-1) {
+						hasCycle =  true;
+						break;
+					}
+					
 				}//if 
 			}// for
 		}//	for
 		// We have done V* E loop	
 		Stack<Integer> optimalPath = new Stack<Integer>();
-
+		if (hasCycle)
+			return null;	
 		int cameFromNode = dest;//vertexMetadata[dest][1];
 		int sizeOfPath =  1;
 		while (cameFromNode != src) {
@@ -69,13 +81,25 @@ public class BellmanFordShortestPath {
 			Assert.assertArrayEquals(expectedPath, actualPath);
 		}
 		
-		//@Test
+		@Test
 		public void test_2(){
 			BellmanFordShortestPath algo =  new BellmanFordShortestPath();
 			int[][] edges = { {0,2,5},{0,1,7} , {1,2,-4} };
 			int[] actualPath = algo.findShortestPath(3, edges, 0, 2);
 			int[] expectedPath= {0,1,2};
 			Assert.assertArrayEquals(expectedPath, actualPath);
+			Assert.assertFalse(algo.hasCycle);
+		}
+		
+		@Test
+		public void test_3(){
+			BellmanFordShortestPath algo =  new BellmanFordShortestPath();
+			int[][] edges = { {0,2,5},{0,1,7} , {1,2,-4} , {2,0,-6}};
+			int[] actualPath = algo.findShortestPath(3, edges, 0, 2);
+			int[] expectedPath= {0,1,2};
+			//Assert.assertArrayEquals(expectedPath, actualPath);
+			Assert.assertTrue(algo.hasCycle);
+			
 		}
 }//class
 
