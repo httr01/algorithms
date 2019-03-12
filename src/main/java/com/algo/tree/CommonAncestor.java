@@ -6,7 +6,7 @@ import org.junit.Test;
 /***
  * Find common Ancestor
  *          24
- *  		   / \
+ *          / \
  *       15   16
  *      /\
  *     8  14
