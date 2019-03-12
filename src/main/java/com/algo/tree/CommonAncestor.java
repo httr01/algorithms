@@ -5,13 +5,13 @@ import org.junit.Test;
  
 /***
  * Find common Ancestor
- *  			24
+ *          24
  *  		   / \
- *  		15	   16
+ *       15   16
  *      /\
  *     8  14
  *        /\
- *       6   3 
+ *       6  3 
  * Example for 16,6  common Ancestor = 24
  **/
 public class CommonAncestor {
