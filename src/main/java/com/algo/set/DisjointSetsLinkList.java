@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 
-public class DisjointSets {
+public class DisjointSetsLinkList {
 	/***DisjointSets using link list to implement.*/
 	public class Set {
 		Node head;
