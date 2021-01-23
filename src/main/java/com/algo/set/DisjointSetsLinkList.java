@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 
-public class DisjointSets {
+public class DisjointSetsLinkList {
 	/***DisjointSets using link list to implement.*/
 	public class Set {
 		Node head;
@@ -81,7 +81,7 @@ public class DisjointSets {
 	
 	@Test
 	public void test_1() {
-		DisjointSets algo = new DisjointSets();
+		DisjointSetsLinkList algo = new DisjointSetsLinkList();
 		Set s1 =  algo.makeSet(1);
 		Set s2 =  algo.makeSet(2);
 		Set s3 =  algo.makeSet(3);
